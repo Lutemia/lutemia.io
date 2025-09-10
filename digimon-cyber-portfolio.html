@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGI-GUARD.EXE - Cybersecurity Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent-cyan: #00ffff;
+            --accent-green: #00ff00;
+            --accent-pink: #ff00aa;
+            --accent-orange: #ffaa00;
+            --text-primary: #00ff00;
+            --text-secondary: #00cccc;
+            --border-color: #333333;
+            --hover-cyan: #33ffff;
+            --card-shadow: rgba(0, 255, 255, 0.3);
+            --neon-glow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor, 0 0 20px currentColor;
+            --neon-glow-strong: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor, 0 0 20px currentColor, 0 0 35px currentColor;
+        }
+
+        [data-theme="light"] {
+            --primary-bg: #f0f0f0;
+            --secondary-bg: #e0e0e0;
+            --accent-cyan: #0066cc;
+            --accent-green: #006600;
+            --accent-pink: #cc0066;
+            --accent-orange: #cc6600;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --border-color: #cccccc;
+            --hover-cyan: #0088ff;
+            --card-shadow: rgba(0, 102, 204, 0.2);
+            --neon-glow: 0 2px 4px rgba(0, 102, 204, 0.3);
+            --neon-glow-strong: 0 2px 8px rgba(0, 102, 204, 0.4);
+        }
+
+        body {
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            background-image: 
+                radial-gradient(circle at 25% 25%, var(--accent-cyan) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, var(--accent-green) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Retro Scanlines Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                rgba(0, 255, 0, 0.03) 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        /* Header */
+        header {
+            background: var(--primary-bg);
+            border-bottom: 3px solid var(--accent-cyan);
+            box-shadow: 0 0 20px var(--accent-cyan);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            text-shadow: var(--neon-glow);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: flicker 2s infinite alternate;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: var(--neon-glow);
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: transparent;
+            border: 2px solid var(--accent-pink);
+            color: var(--accent-pink);
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-pink);
+            color: var(--primary-bg);
+            box-shadow: var(--neon-glow);
+            text-shadow: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 100px;
+            text-align: center;
+            background: var(--primary-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            animation: scan-sweep 4s infinite;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+            text-shadow: var(--neon-glow-strong);
+            animation: float 3s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-button {
+            background: transparent;
+            color: var(--accent-cyan);
+            padding: 15px 30px;
+            text-decoration: none;
+            border: 2px solid var(--accent-cyan);
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-cyan);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            color: var(--primary-bg);
+            box-shadow: var(--neon-glow);
+        }
+
+        /* Main Content */
+        main {
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            padding: 40px;
+            background: var(--secondary-bg);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 30px var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 50px var(--accent-cyan);
+        }
+
+        .section h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--accent-cyan);
+            text-shadow: var(--neon-glow);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: bold;
+        }
+
+        .section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--primary-bg);
+            padding: 2rem;
+            border: 2px solid var(--accent-green);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-pink), transparent);
+            animation: scan-line 3s infinite;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px var(--accent-green);
+            border-color: var(--accent-pink);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--accent-orange);
+        }
+
+        .project-card h4 {
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .project-tech {
+            font-size: 0.9rem;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-link {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 8px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-bg);
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: var(--primary-bg);
+            padding: 1.5rem;
+            border: 1px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .blog-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .blog-card:hover::after {
+            width: 100%;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px var(--accent-green);
+            border-color: var(--accent-cyan);
+        }
+
+        .blog-card h4 {
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .blog-card .date {
+            font-size: 0.9rem;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-item {
+            background: var(--primary-bg);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--accent-orange);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(45deg, #000000, #ffff00, #0066ff, #000000);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-item:hover::before {
+            opacity: 1;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            color: #ffffff;
+        }
+
+        .skill-item h4 {
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* GitHub Link */
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--accent-green);
+            border: 2px solid var(--accent-green);
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .github-link:hover {
+            background: var(--accent-green);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 3px solid var(--accent-cyan);
+            box-shadow: 0 0 20px var(--accent-cyan);
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.5; box-shadow: 0 0 5px currentColor; }
+            100% { opacity: 1; box-shadow: 0 0 20px currentColor; }
+        }
+
+        @keyframes scan-line {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes scan-sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">💾 DIGI-GUARD.EXE</div>
+            <ul class="nav-links">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#projects">PROJECTS</a></li>
+                <li><a href="#blog">BLOG</a></li>
+                <li><a href="#github">GITHUB</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">LIGHT MODE</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>DIGI-GUARD.EXE</h1>
+                <p>>> CYBERSECURITY.PROTOCOL_ACTIVE | DIGITAL.WORLD_DEFENDER | SECURITY.ANALYST_v2.0</p>
+                <a href="#about" class="cta-button">[INITIALIZE_DIGITAL_REALM.EXE]</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="about" class="section">
+            <h2>ABOUT_ME.DAT</h2>
+            <p>>>> SYSTEM_STATUS: ONLINE | PROTECTION_LEVEL: MAXIMUM | THREAT_DETECTION: ACTIVE</p>
+            
+            <p>Welcome to my digital domain! I'm a passionate cybersecurity professional dedicated to protecting the digital world from threats and vulnerabilities. Like a Digimon tamer navigating through complex digital landscapes, I identify and neutralize cyber threats before they can cause harm to our interconnected world.</p>
+            
+            <p>My journey in cybersecurity began with a fascination for how digital systems work and evolved into a mission to safeguard organizations and individuals from malicious actors. I specialize in threat analysis, incident response, and security architecture design.</p>
+
+            <h3>>>> CORE_EXPERTISE.SYS</h3>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h4>🛡️ THREAT_ANALYSIS</h4>
+                    <p>Advanced threat hunting and malware analysis capabilities with real-time monitoring systems</p>
+                </div>
+                <div class="skill-item">
+                    <h4>🔍 INCIDENT_RESPONSE</h4>
+                    <p>Rapid response to security incidents and comprehensive forensic investigation protocols</p>
+                </div>
+                <div class="skill-item">
+                    <h4>🏗️ SECURITY_ARCHITECTURE</h4>
+                    <p>Designing secure systems and implementing defense-in-depth strategies</p>
+                </div>
+                <div class="skill-item">
+                    <h4>⚡ PENETRATION_TESTING</h4>
+                    <p>Ethical hacking and comprehensive vulnerability assessment expertise</p>
+                </div>
+            </div>
+
+            <h3>>>> CERTIFICATIONS.LOG</h3>
+            <p>• CISSP (Certified Information Systems Security Professional)<br>
+               • CEH (Certified Ethical Hacker)<br>
+               • GCIH (GIAC Certified Incident Handler)<br>
+               • Security+ CompTIA Certified<br>
+               • OSCP (Offensive Security Certified Professional)</p>
+        </section>
+
+        <section id="projects" class="section">
+            <h2>DIGITAL_PROJECTS.EXE</h2>
+            <p>>>> LOADING_SECURITY_ARSENAL... | STATUS: READY | THREAT_LEVEL: NEUTRALIZED</p>
+            <p>Explore my arsenal of cybersecurity tools and defensive systems. Each project represents a different aspect of digital protection and threat mitigation in our ever-evolving digital battlefield.</p>
+            
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-icon">🛡️</div>
+                    <h4>NETWORK_GUARDIAN.EXE</h4>
+                    <div class="project-tech">PYTHON • SCAPY • MACHINE_LEARNING</div>
+                    <p>Advanced network intrusion detection system with machine learning-based anomaly detection. Real-time traffic analysis and automated threat response capabilities.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">VIEW_CODE</a>
+                        <a href="#" class="project-link">LIVE_DEMO</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">🔍</div>
+                    <h4>MALWARE_HUNTER.EXE</h4>
+                    <div class="project-tech">C++ • ASSEMBLY • REVERSE_ENGINEERING</div>
+                    <p>Static and dynamic malware analysis toolkit with signature generation and behavioral pattern recognition capabilities for zero-day threat detection.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">VIEW_CODE</a>
+                        <a href="#" class="project-link">DOCUMENTATION</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">⚡</div>
+                    <h4>VULN_SCANNER.EXE</h4>
+                    <div class="project-tech">GO • DOCKER • REST_API</div>
+                    <p>High-performance vulnerability assessment engine with custom exploit detection and automated penetration testing modules for comprehensive security auditing.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">VIEW_CODE</a>
+                        <a href="#" class="project-link">API_DOCS</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">🔐</div>
+                    <h4>CRYPTO_SHIELD.EXE</h4>
+                    <div class="project-tech">RUST • WEBASSEMBLY • CRYPTOGRAPHY</div>
+                    <p>Zero-knowledge encryption library with quantum-resistant algorithms and secure key management protocols for future-proof data protection.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">VIEW_CODE</a>
+                        <a href="#" class="project-link">WHITEPAPER</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">📊</div>
+                    <h4>THREAT_INTEL_DASH.EXE</h4>
+                    <div class="project-tech">REACT • D3.JS • NODE.JS</div>
+                    <p>Real-time cybersecurity intelligence platform with interactive visualizations and automated threat feed aggregation from global sources.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">VIEW_CODE</a>
+                        <a href="#" class="project-link">LIVE_DEMO</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">🚀</div>
+                    <h4>INCIDENT_BOT.EXE</h4>
+                    <div class="project-tech">PYTHON • SLACK_API • AWS_LAMBDA</div>
+                    <p>Automated incident response system with Slack integration, intelligent threat triage, and coordinated defense deployment capabilities.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">VIEW_CODE</a>
+                        <a href="#" class="project-link">SETUP_GUIDE</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="section">
+            <h2>SECURITY_BLOG.LOG</h2>
+            <p>>>> TRANSMITTING_INTELLIGENCE... | ENCRYPTION: ACTIVE | ACCESS_LEVEL: PUBLIC</p>
+            <p>Sharing insights from the frontlines of cybersecurity. Here you'll find analysis of the latest threats, defensive strategies, and thoughts on the evolving digital landscape.</p>
+            
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <h4>RANSOMWARE_EVOLUTION_2024.TXT</h4>
+                    <div class="date">12.15.2024_08:32:15</div>
+                    <p>An in-depth analysis of how ransomware tactics have evolved and what organizations need to know to stay protected against next-generation threats...</p>
+                </article>
+                
+                <article class="blog-card">
+                    <h4>ZERO_TRUST_IMPLEMENTATION.DOC</h4>
+                    <div class="date">11.28.2024_14:45:23</div>
+                    <p>Breaking down the core principles of Zero Trust architecture and practical steps for implementation in enterprise environments...</p>
+                </article>
+                
+                <article class="blog-card">
+                    <h4>AI_CYBERSECURITY_ANALYSIS.PDF</h4>
+                    <div class="date">11.10.2024_09:17:41</div>
+                    <p>Exploring how artificial intelligence is transforming both cyber defense and attack methodologies in our digital battlefield...</p>
+                </article>
+                
+                <article class="blog-card">
+                    <h4>SUPPLY_CHAIN_SECURITY.LOG</h4>
+                    <div class="date">10.22.2024_16:28:37</div>
+                    <p>Analyzing major supply chain attacks and developing strategies to secure your digital supply chain against sophisticated threats...</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="github" class="section">
+            <h2>OPEN_SOURCE.GIT</h2>
+            <p>>>> REPOSITORY_STATUS: ACTIVE | CONTRIBUTIONS: PUBLIC | LICENSE: OPEN_SOURCE</p>
+            <p>I believe in giving back to the cybersecurity community through open source projects and tools. My GitHub repositories contain security utilities, research findings, and educational resources for fellow digital defenders.</p>
+            
+            <p>Featured projects include threat hunting scripts, incident response playbooks, security automation tools, and research into emerging attack vectors designed to help organizations strengthen their security posture.</p>
+            
+            <a href="https://github.com/yourusername" class="github-link" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                ACCESS_REPOSITORY.GIT
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 DIGI-GUARD.EXE PORTFOLIO | PROTECTING_THE_DIGITAL_REALM.ONE_BYTE_AT_A_TIME | STATUS: ONLINE</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-toggle');
+            
+            if (body.hasAttribute('data-theme')) {
+                body.removeAttribute('data-theme');
+                button.textContent = 'LIGHT MODE';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                button.textContent = 'DARK MODE';
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add interactive effects
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Blog post accessed:', this.querySelector('h4').textContent);
+                // Add terminal-style feedback
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-3px)';
+                }, 100);
+            });
+        });
+
+        // Project card interactions
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // Add scanning effect
+                this.style.borderImage = 'linear-gradient(45deg, var(--accent-cyan), var(--accent-green), var(--accent-pink)) 1';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderImage = 'none';
+            });
+        });
+
+        // Header effects on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 0 30px var(--accent-cyan)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.boxShadow = '0 0 20px var(--accent-cyan)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Terminal-style typing effect for hero text
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on load
+        window.addEventListener('load', function() {
+            const heroText = document.querySelector('.hero p');
+            const originalText = heroText.textContent;
+            typeWriter(heroText, originalText, 50);
+        });
+
+        // Add glitch effect to logo on hover
+        document.querySelector('.logo').addEventListener('mouseenter', function() {
+            this.style.animation = 'flicker 0.5s infinite';
+        });
+
+        document.querySelector('.logo').addEventListener('mouseleave', function() {
+            this.style.animation = 'flicker 2s infinite alternate';
+        });
+
+        // Random color cycling for accent elements
+        function cycleColors() {
+            const colors = ['var(--accent-cyan)', 'var(--accent-green)', 'var(--accent-pink)', 'var(--accent-orange)'];
+            const elements = document.querySelectorAll('.section::before');
+            
+            elements.forEach(element => {
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                element.style.background = randomColor;
+                element.style.boxShadow = `0 0 10px ${randomColor}`;
+            });
+        }
+
+        // Cycle colors every 10 seconds
+        setInterval(cycleColors, 10000);
+
+        // Matrix-style background effect
+        function createMatrixEffect() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.zIndex = '-1';
+            canvas.style.opacity = '0.1';
+            
+            document.body.appendChild(canvas);
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const matrix = "01";
+            const matrixArray = matrix.split("");
+            
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            
+            const drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(10, 10, 10, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ff00';
+                ctx.font = fontSize + 'px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 35);
+        }
+
+        // Initialize matrix effect in dark mode
+        if (!document.body.hasAttribute('data-theme')) {
+            createMatrixEffect();
+        }
+    </script>
+</body>
+</html>
